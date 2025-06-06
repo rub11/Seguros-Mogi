@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reflexão sobre Segurança - Garça Seguros</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #1a3c6c, #2a5298);
+            color: #333;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            line-height: 1.6;
+        }
+        
+        .container {
+            max-width: 800px;
+            width: 100%;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.25);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .header {
+            background: linear-gradient(to right, #0a2a5a, #1a3c6c);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+        
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        
+        .logo {
+            width: 100px;
+            height: 100px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .logo-inner {
+            width: 70px;
+            height: 70px;
+            background: #1a3c6c;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .logo-icon {
+            font-size: 35px;
+            color: white;
+        }
+        
+        .logo-text {
+            font-size: 28px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+        }
+        
+        .tagline {
+            font-size: 18px;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        
+        .page {
+            padding: 40px;
+            display: none;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.8s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .question-container {
+            padding: 20px 0;
+            text-align: center;
+        }
+        
+        .question-number {
+            font-size: 18px;
+            color: #2a5298;
+            margin-bottom: 15px;
+            font-weight: 600;
+        }
+        
+        .question {
+            font-size: 24px;
+            line-height: 1.4;
+            margin-bottom: 35px;
+            color: #1a3c6c;
+            font-weight: 600;
+            padding: 20px;
+            background: #f0f7ff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+            min-height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        
+        .option-btn {
+            background: #e6f2ff;
+            color: #1a3c6c;
+            border: 2px solid #c5d9ff;
+            padding: 18px 25px;
+            font-size: 18px;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-weight: 500;
+        }
+        
+        .option-btn:hover {
+            background: #d4e4ff;
+            transform: translateX(5px);
+        }
+        
+        .option-btn.selected {
+            background: #2a5298;
+            color: white;
+            border-color: #2a5298;
+            box-shadow: 0 5px 15px rgba(42, 82, 152, 0.2);
+        }
+        
+        .option-btn i {
+            font-size: 22px;
+            min-width: 30px;
+        }
+        
+        .progress-container {
+            margin-top: 40px;
+            background: #e6f2ff;
+            border-radius: 10px;
+            padding: 10px;
+        }
+        
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 8px;
+            color: #1a3c6c;
+            font-weight: 600;
+        }
+        
+        .progress-bar {
+            height: 12px;
+            background: #d1e0ff;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: linear-gradient(to right, #2a5298, #1a3c6c);
+            border-radius: 10px;
+            width: 0%;
+            transition: width 0.5s ease-in-out;
+        }
+        
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 25px;
+        }
+        
+        .nav-btn {
+            background: linear-gradient(to right, #2a5298, #1a3c6c);
+            color: white;
+            border: none;
+            padding: 14px 30px;
+            font-size: 18px;
+            font-weight: 600;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            box-shadow: 0 5px 15px rgba(42, 82, 152, 0.3);
+        }
+        
+        .nav-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(42, 82, 152, 0.4);
+        }
+        
+        .nav-btn:active {
+            transform: translateY(0);
+        }
+        
+        .nav-btn.secondary {
+            background: linear-gradient(to right, #6c8bc7, #4a6cb3);
+        }
+        
+        .nav-btn:disabled {
+            background: #95a5a6;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+        
+        .success-page {
+            text-align: center;
+            padding: 40px 20px;
+        }
+        
+        .success-icon {
+            font-size: 80px;
+            color: #2a5298;
+            margin-bottom: 20px;
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .success-title {
+            font-size: 32px;
+            color: #1a3c6c;
+            margin-bottom: 20px;
+            font-weight: 700;
+        }
+        
+        .success-message {
+            font-size: 18px;
+            color: #2a5298;
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.8;
+        }
+        
+        .countdown {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a3c6c;
+            margin: 25px 0;
+            background: #f0f7ff;
+            padding: 15px;
+            border-radius: 10px;
+            display: inline-block;
+            min-width: 200px;
+        }
+        
+        .redirect-btn {
+            background: linear-gradient(to right, #2a5298, #1a3c6c);
+            color: white;
+            border: none;
+            padding: 16px 40px;
+            font-size: 20px;
+            font-weight: 600;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            box-shadow: 0 5px 20px rgba(42, 82, 152, 0.4);
+            margin-top: 20px;
+        }
+        
+        .redirect-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(42, 82, 152, 0.5);
+        }
+        
+        .footer {
+            text-align: center;
+            color: white;
+            padding: 25px;
+            font-size: 14px;
+            background: #1a3c6c;
+            border-top: 1px solid #2a5298;
+        }
+        
+        @media (max-width: 768px) {
+            .header {
+                padding: 25px 20px;
+            }
+            
+            .page {
+                padding: 30px 20px;
+            }
+            
+            .question {
+                font-size: 20px;
+                min-height: auto;
+                padding: 15px;
+            }
+            
+            .option-btn {
+                padding: 15px 20px;
+                font-size: 16px;
+            }
+            
+            .success-title {
+                font-size: 28px;
+            }
+            
+            .success-message {
+                font-size: 16px;
+            }
+            
+            .navigation {
+                flex-direction: column;
+                gap: 10px;
+            }
+            
+            .nav-btn {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="logo-container">
+                <div class="logo">
+                    <div class="logo-inner">
+                        <i class="fas fa-shield-alt logo-icon"></i>
+                    </div>
+                </div>
+            </div>
+            <div class="logo-text">Garça Seguros</div>
+            <div class="tagline">Proteção que faz sentido para sua família</div>
+        </div>
+        
+        <!-- Página de Perguntas -->
+        <div id="questionsPage" class="page active">
+            <div class="question-container">
+                <div class="question-number">Pergunta <span id="currentQuestion">1</span> de <span id="totalQuestions">5</span></div>
+                <div class="question" id="question">Se algo acontecesse com você hoje, quem garantiria o futuro dos seus filhos?</div>
+                
+                <div class="options" id="options">
+                    <button class="option-btn" data-value="Sim, já pensei nisso">
+                        <i class="fas fa-heart"></i> Sim, já pensei nisso e me preocupo
+                    </button>
+                    <button class="option-btn" data-value="Não muito">
+                        <i class="fas fa-question-circle"></i> Não muito, confio que tudo se resolveria
+                    </button>
+                    <button class="option-btn" data-value="Não">
+                        <i class="fas fa-times-circle"></i> Não, nunca parei para pensar nisso
+                    </button>
+                </div>
+                
+                <div class="progress-container">
+                    <div class="progress-label">
+                        <span>Progresso</span>
+                        <span id="progressPercent">0%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress" id="progressBar"></div>
+                    </div>
+                </div>
+                
+                <div class="navigation">
+                    <button class="nav-btn secondary" id="prevBtn" disabled>
+                        <i class="fas fa-arrow-left"></i> Anterior
+                    </button>
+                    <button class="nav-btn" id="nextBtn">
+                        Próxima <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Página de Agradecimento -->
+        <div id="successPage" class="page">
+            <div class="success-page">
+                <div class="success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                <h2 class="success-title">Obrigado por sua Reflexão!</h2>
+                <p class="success-message">
+                    Suas respostas mostram que você se importa com o bem-estar da sua família. 
+                    Na Garça Seguros, entendemos o valor da segurança e da tranquilidade. 
+                    Estamos aqui para ajudar você a proteger o que mais importa.
+                </p>
+                
+                <div class="countdown">
+                    Redirecionando em <span id="countdown">10</span> segundos
+                </div>
+                
+                <p class="success-message">
+                    Você será direcionado ao nosso site para conhecer soluções de proteção personalizadas para sua família.
+                </p>
+                
+                <button class="redirect-btn" id="redirectBtn">
+                    <i class="fas fa-external-link-alt"></i> Acessar Agora
+                </button>
+            </div>
+        </div>
+        
+        <div class="footer">
+            Garça Seguros © 2023 - Todos os direitos reservados.<br>
+            Proteja o que é importante para você.
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos da página
+            const questionsPage = document.getElementById('questionsPage');
+            const successPage = document.getElementById('successPage');
+            const questionElement = document.getElementById('question');
+            const currentQuestionElement = document.getElementById('currentQuestion');
+            const totalQuestionsElement = document.getElementById('totalQuestions');
+            const optionsContainer = document.getElementById('options');
+            const progressBar = document.getElementById('progressBar');
+            const progressPercent = document.getElementById('progressPercent');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+            const countdownElement = document.getElementById('countdown');
+            const redirectBtn = document.getElementById('redirectBtn');
+            
+            // Perguntas emocionais
+            const questions = [
+                "Se algo acontecesse com você hoje, quem garantiria o futuro dos seus filhos?",
+                "Você já imaginou como sua família pagaria as contas se você ficasse incapacitado para trabalhar?",
+                "Sabe o que aconteceria com seus filhos se você não estivesse mais aqui para sustentá-los?",
+                "Como sua família lidaria com uma emergência médica inesperada sem um plano de saúde adequado?",
+                "O que vale mais: economizar hoje alguns reais ou garantir a segurança do seu amanhã?"
+            ];
+            
+            const answers = [];
+            let currentQuestionIndex = 0;
+            let countdownTimer;
+            
+            // Inicializar o questionário
+            totalQuestionsElement.textContent = questions.length;
+            showQuestion(currentQuestionIndex);
+            
+            // Função para mostrar pergunta
+            function showQuestion(index) {
+                questionElement.textContent = questions[index];
+                currentQuestionElement.textContent = index + 1;
+                
+                // Atualizar barra de progresso
+                const progress = ((index + 1) / questions.length) * 100;
+                progressBar.style.width = progress + '%';
+                progressPercent.textContent = Math.round(progress) + '%';
+                
+                // Atualizar estado dos botões de navegação
+                prevBtn.disabled = index === 0;
+                
+                if (index === questions.length - 1) {
+                    nextBtn.innerHTML = 'Finalizar <i class="fas fa-check"></i>';
+                } else {
+                    nextBtn.innerHTML = 'Próxima <i class="fas fa-arrow-right"></i>';
+                }
+                
+                // Resetar seleção de botões
+                const buttons = optionsContainer.querySelectorAll('.option-btn');
+                buttons.forEach(btn => btn.classList.remove('selected'));
+                nextBtn.disabled = true;
+            }
+            
+            // Seleção de resposta
+            optionsContainer.addEventListener('click', function(e) {
+                if (e.target.classList.contains('option-btn')) {
+                    // Remover seleção anterior
+                    const buttons = optionsContainer.querySelectorAll('.option-btn');
+                    buttons.forEach(btn => btn.classList.remove('selected'));
+                    
+                    // Selecionar nova opção
+                    e.target.classList.add('selected');
+                    
+                    // Armazenar resposta
+                    answers[currentQuestionIndex] = {
+                        question: questions[currentQuestionIndex],
+                        answer: e.target.getAttribute('data-value')
+                    };
+                    
+                    // Habilitar botão de próxima
+                    nextBtn.disabled = false;
+                }
+            });
+            
+            // Navegação entre perguntas
+            nextBtn.addEventListener('click', function() {
+                if (!answers[currentQuestionIndex]) {
+                    alert('Por favor, selecione uma resposta para continuar.');
+                    return;
+                }
+                
+                if (currentQuestionIndex === questions.length - 1) {
+                    // Finalizar questionário
+                    finishQuestionnaire();
+                    return;
+                }
+                
+                currentQuestionIndex++;
+                showQuestion(currentQuestionIndex);
+            });
+            
+            prevBtn.addEventListener('click', function() {
+                currentQuestionIndex--;
+                showQuestion(currentQuestionIndex);
+                
+                // Restaurar seleção anterior se existir
+                if (answers[currentQuestionIndex]) {
+                    const buttons = optionsContainer.querySelectorAll('.option-btn');
+                    buttons.forEach(btn => {
+                        if (btn.getAttribute('data-value') === answers[currentQuestionIndex].answer) {
+                            btn.classList.add('selected');
+                        }
+                    });
+                }
+            });
+            
+            // Função para finalizar o questionário
+            function finishQuestionnaire() {
+                questionsPage.classList.remove('active');
+                successPage.classList.add('active');
+                
+                // Iniciar contagem regressiva
+                let count = 10;
+                countdownElement.textContent = count;
+                
+                countdownTimer = setInterval(() => {
+                    count--;
+                    countdownElement.textContent = count;
+                    
+                    if (count <= 0) {
+                        clearInterval(countdownTimer);
+                        redirectToGarçaSeguros();
+                    }
+                }, 1000);
+            }
+            
+            // Função para redirecionar
+            function redirectToGarçaSeguros() {
+                window.location.href = 'https://rub11.github.io/Seguros-Mogi/';
+            }
+            
+            // Botão de redirecionamento manual
+            redirectBtn.addEventListener('click', function() {
+                clearInterval(countdownTimer);
+                redirectToGarçaSeguros();
+            });
+        });
+    </script>
+</body>
+</html>

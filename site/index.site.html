@@ -1,0 +1,757 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garça Seguros - 30 Anos Protegendo o que é Seu</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0056b3;
+            --secondary: #6a00f4;
+            --accent: #00c853;
+            --light: #f8f9fa;
+            --dark: #343a40;
+            --text: #212529;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            color: var(--text);
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .container {
+            width: 90%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+        }
+
+        .logo-icon {
+            background: white;
+            color: var(--primary);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 10px;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+        }
+
+        nav ul li {
+            margin-left: 1.5rem;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        nav ul li a:hover {
+            opacity: 0.8;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0, 86, 179, 0.8), rgba(106, 0, 244, 0.8)), url('https://images.unsplash.com/photo-1601584115197-04ecc0da31e8?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            color: white;
+            padding: 10rem 0 5rem;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: var(--accent);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 0.5rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 200, 83, 0.4);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(0, 200, 83, 0.6);
+        }
+
+        .whatsapp-button {
+            background-color: #25D366;
+        }
+
+        .services {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.5rem;
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .service-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            font-size: 2.5rem;
+            padding: 2rem;
+            text-align: center;
+        }
+
+        .service-content {
+            padding: 1.5rem;
+        }
+
+        .service-content h3 {
+            margin-top: 0;
+            color: var(--primary);
+        }
+
+        .benefits {
+            padding: 5rem 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+        }
+
+        .benefit-item {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .benefit-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--accent);
+        }
+
+        .testimonials {
+            padding: 5rem 0;
+            background-color: white;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .testimonial-card {
+            background: var(--light);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            margin-bottom: 1.5rem;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+        }
+
+        .contact {
+            padding: 5rem 0;
+            background-color: var(--light);
+        }
+
+        .contact-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .contact-method {
+            display: flex;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .contact-icon {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-right: 1rem;
+            font-size: 1.5rem;
+        }
+
+        .contact-text h3 {
+            margin: 0;
+            color: var(--primary);
+        }
+
+        .contact-text p {
+            margin: 0.3rem 0 0;
+        }
+
+        .social-links {
+            display: flex;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            margin-right: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 2rem 0;
+            text-align: center;
+        }
+
+        .footer-content {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .footer-links {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin-bottom: 1.5rem;
+        }
+
+        .footer-links li {
+            margin: 0 1rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .copyright {
+            font-size: 0.9rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            nav ul {
+                margin-top: 1rem;
+                justify-content: center;
+            }
+
+            nav ul li {
+                margin: 0 0.5rem;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            animation: fadeIn 1s ease forwards;
+        }
+
+        .delay-1 {
+            animation-delay: 0.2s;
+        }
+
+        .delay-2 {
+            animation-delay: 0.4s;
+        }
+
+        .delay-3 {
+            animation-delay: 0.6s;
+        }
+
+        .delay-4 {
+            animation-delay: 0.8s;
+        }
+
+        /* Floating WhatsApp Button */
+        .floating-whatsapp {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            background-color: #25D366;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1.8rem;
+            box-shadow: 0 4px 20px rgba(37, 211, 102, 0.5);
+            z-index: 999;
+            transition: all 0.3s ease;
+            text-decoration: none;
+        }
+
+        .floating-whatsapp:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.7);
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="container header-content">
+            <div class="logo">
+                <div class="logo-icon">G</div>
+                Garça Seguros
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="#home">Início</a></li>
+                    <li><a href="#services">Serviços</a></li>
+                    <li><a href="#benefits">Vantagens</a></li>
+                    <li><a href="#testimonials">Depoimentos</a></li>
+                    <li><a href="#contact">Contato</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container fade-in">
+            <h1>30 Anos Protegendo o que é Seu</h1>
+            <p>A Garça Corretora de Seguros agora em Mogi das Cruzes, com toda a experiência e confiança que você
+                merece.</p>
+            <div>
+                <a href="https://wa.me/5511963740100?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20seguros"
+                    class="cta-button whatsapp-button">
+                    <i class="fab fa-whatsapp"></i> Fale conosco
+                </a>
+                <a href="#services" class="cta-button">
+                    <i class="fas fa-shield-alt"></i> Nossos Seguros
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Nossos Serviços</h2>
+                <p>Proteção completa para você e sua família</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card fade-in delay-1">
+                    <div class="service-icon">
+                        <i class="fas fa-car"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguro Auto</h3>
+                        <p>Proteção completa para seu veículo com as melhores coberturas do mercado e assistência 24h.
+                        </p>
+                       
+                        <a href="https://wa.me/5511963740100?text=Ol%C3%A1%2C%20tudo%20bem%3F%20%F0%9F%98%8A%0AVi%20sobre%20o%20Seguro%20Auto%20de%20voc%C3%AAs%20e%20gostaria%20de%20saber%20mais%20informa%C3%A7%C3%B5es.%0A"
+                            class="cta-button whatsapp-button" style="padding: 0.5rem 1rem; font-size: 1rem;">
+                            Cotar agora
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in delay-2">
+                    <div class="service-icon">
+                        <i class="fas fa-home"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguro Residencial</h3>
+                        <p>Proteja sua casa contra incêndios, roubos, danos elétricos e muito mais.</p>
+                       
+                        <a href="https://wa.me/5511963740100?text=Olá,%20gostaria%20de%20um%20orçamento%20para%20seguro%20residencial"
+                            class="cta-button whatsapp-button" style="padding: 0.5rem 1rem; font-size: 1rem;">
+                            Cotar agora
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in delay-3">
+                    <div class="service-icon">
+                        <i class="fas fa-heartbeat"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguro de Vida</h3>
+                        <p>Proteção financeira para sua família em casos de imprevistos, com diversas opções de
+                            cobertura.</p>
+                        <p><strong>Planos personalizados</strong> para todas as necessidades.</p>
+                        <a href="https://wa.me/5511963740100?text=Olá,%20gostaria%20de%20um%20orçamento%20para%20seguro%20de%20vida"
+                            class="cta-button whatsapp-button" style="padding: 0.5rem 1rem; font-size: 1rem;">
+                            Cotar agora
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in delay-4">
+                    <div class="service-icon">
+                        <i class="fas fa-building"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Seguro Empresarial</h3>
+                        <p>Proteção completa para seu negócio contra incêndios, roubos, responsabilidade civil e mais.
+                        </p>
+                        <p><strong>Consultoria especializada</strong> para sua empresa.</p>
+                        <a href="https://wa.me/5511963740100?text=Olá,%20gostaria%20de%20um%20orçamento%20para%20seguro%20empresarial"
+                            class="cta-button whatsapp-button" style="padding: 0.5rem 1rem; font-size: 1rem;">
+                            Cotar agora
+                        </a>
+                    </div>
+                </div>
+
+                <div class="service-card fade-in delay-1">
+                    <div class="service-icon">
+                        <i class="fas fa-medkit"></i>
+                    </div>
+                    <div class="service-content">
+                        <h3>Plano de Saúde</h3>
+                        <p>Os melhores planos de saúde com ampla rede credenciada e valores acessíveis.</p>
+                        <p><strong>Atendimento personalizado</strong> para encontrar o melhor plano para você.</p>
+                        <a href="https://wa.me/5511963740100?text=Olá,%20gostaria%20de%20um%20orçamento%20para%20plano%20de%20saúde"
+                            class="cta-button whatsapp-button" style="padding: 0.5rem 1rem; font-size: 1rem;">
+                            Cotar agora
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="benefits" class="benefits">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2 style="color: white;">Por que escolher a Garça Seguros?</h2>
+                <p style="color: rgba(255,255,255,0.8);">Nossas vantagens exclusivas</p>
+            </div>
+            <div class="benefits-grid">
+                <div class="benefit-item fade-in delay-1">
+                    <div class="benefit-icon">
+                        <i class="fas fa-award"></i>
+                    </div>
+                    <h3>30 Anos de Experiência</h3>
+                    <p>Tradição e confiança no mercado de seguros</p>
+                </div>
+
+                <div class="benefit-item fade-in delay-2">
+                    <div class="benefit-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Economia Garantida</h3>
+                    <p>Negociamos para você pagar menos pelo melhor seguro</p>
+                </div>
+
+                <div class="benefit-item fade-in delay-3">
+                    <div class="benefit-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Atendimento Personalizado</h3>
+                    <p>Equipe especializada pronta para te atender</p>
+                </div>
+
+                <div class="benefit-item fade-in delay-4">
+                    <div class="benefit-icon">
+                        <i class="fas fa-shield-alt"></i>
+                    </div>
+                    <h3>As Melhores Seguradoras</h3>
+                    <p>Trabalhamos com as maiores e mais confiáveis do mercado</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>O que nossos clientes dizem</h2>
+                <p>Confiança e satisfação garantidas</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card fade-in delay-1">
+                    <div class="testimonial-text">
+                        "Depois que contratei o seguro auto com a Garça, nunca mais me preocupei. Quando precisei, o
+                        atendimento foi rápido e eficiente. Recomendo!"
+                    </div>
+                    <div class="testimonial-author">
+                        Carlos Silva ⭐⭐⭐⭐⭐
+                    </div>
+                </div>
+
+                <div class="testimonial-card fade-in delay-2">
+                    <div class="testimonial-text">
+                        "Fui atendido com muita paciência e profissionalismo. Conseguiram um plano de saúde excelente
+                        para minha família por um preço que cabia no meu orçamento."
+                    </div>
+                    <div class="testimonial-author">
+                        Ana Oliveira ⭐⭐⭐⭐⭐
+                    </div>
+                </div>
+
+                <div class="testimonial-card fade-in delay-3">
+                    <div class="testimonial-text">
+                        "Minha casa sofreu um pequeno incêndio e o seguro residencial que contratei com a Garça cobriu
+                        todos os danos sem burocracia. Estou muito satisfeita!"
+                    </div>
+                    <div class="testimonial-author">
+                        Mariana Costa ⭐⭐⭐⭐⭐
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-title fade-in">
+                <h2>Entre em Contato</h2>
+                <p>Estamos prontos para te atender</p>
+            </div>
+            <div class="contact-container">
+                <div class="contact-info fade-in delay-1">
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <a style="color: white;" href="https://wa.me/5511963740100"> <i class="fab fa-whatsapp"></i></a>
+                           
+                        </div>
+                        <div class="contact-text">
+                            <h3>WhatsApp</h3>
+                            <p>(11) 96374-0100</p>
+                            <p>Atendimento rápido e direto</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                         <a style="color: white;" href="https://instagram.com/garcaseguros_mogi">   <i class="fab fa-instagram"></i></a>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Instagram</h3>
+                            <p>@garcaseguros_mogi</p>
+                            <p>Acompanhe nossas novidades</p>
+                        </div>
+                    </div>
+
+                    <div class="contact-method">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-text">
+                            <h3>Atendimento Personalizado</h3>
+                            <p>Mogi das Cruzes - SP</p>
+                            <p>Atendimento via WhatsApp</p>
+                        </div>
+                    </div>
+
+                    <div class="social-links">
+                        <a href="https://wa.me/5511963740100" aria-label="WhatsApp">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                        <a href="https://instagram.com/garcaseguros_mogi" aria-label="Instagram">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                    </div>
+                </div>
+
+               
+                        <button type="button" onclick="window.location.href='https://wa.me/5511963740100'"
+                            class="cta-button" style="width: 100%; padding: 0.8rem; border: none; cursor: pointer;">
+                            <i class="fab fa-whatsapp"></i> Enviar mensagem
+                        </button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-logo">
+                Garça Seguros
+            </div>
+            <ul class="footer-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#services">Serviços</a></li>
+                <li><a href="#benefits">Vantagens</a></li>
+                <li><a href="#testimonials">Depoimentos</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+            <div class="copyright">
+                © 2023 Garça Seguros. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <a href="https://wa.me/5511963740100?text=Olá,%20gostaria%20de%20saber%20mais%20sobre%20os%20seguros"
+        class="floating-whatsapp" aria-label="Fale conosco no WhatsApp">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Simple animation trigger on scroll
+        document.addEventListener('DOMContentLoaded', function () {
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            const fadeObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = 1;
+                        entry.target.style.transform = 'translateY(0)';
+                    }
+                });
+            }, { threshold: 0.1 });
+
+            fadeElements.forEach(element => {
+                fadeObserver.observe(element);
+            });
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+
+                    const targetId = this.getAttribute('href');
+                    if (targetId === '#') return;
+
+                    const targetElement = document.querySelector(targetId);
+                    if (targetElement) {
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>

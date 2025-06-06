@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Garça Seguros - Cadastro</title>
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    
+    body {
+      background: linear-gradient(135deg, #1a3c6c, #2a5298);
+      color: #003366;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      padding: 20px;
+    }
+    
+    .container {
+      background: white;
+      border-radius: 16px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+      max-width: 500px;
+      width: 100%;
+      overflow: hidden;
+      position: relative;
+    }
+    
+    .header {
+      background: linear-gradient(to right, #0a2a5a, #1a3c6c);
+      color: white;
+      padding: 30px;
+      text-align: center;
+      position: relative;
+    }
+    
+    .logo-container {
+      margin-bottom: 20px;
+    }
+    
+    .logo {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: white;
+      width: 80px;
+      height: 80px;
+      border-radius: 50%;
+      margin-bottom: 15px;
+    }
+    
+    .logo-inner {
+      width: 60px;
+      height: 60px;
+      background: #1a3c6c;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    
+    .logo-icon {
+      font-size: 28px;
+      color: white;
+    }
+    
+    .logo-text {
+      font-size: 28px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      margin-bottom: 8px;
+    }
+    
+    .tagline {
+      font-size: 18px;
+      opacity: 0.9;
+      max-width: 400px;
+      margin: 0 auto;
+    }
+    
+    .form-container {
+      padding: 30px;
+    }
+    
+    h1 {
+      text-align: center;
+      margin-bottom: 25px;
+      color: #1a3c6c;
+      font-size: 26px;
+    }
+    
+    .form-group {
+      margin-bottom: 25px;
+      position: relative;
+    }
+    
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: #1a3c6c;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    
+    input {
+      width: 100%;
+      padding: 14px 16px 14px 48px;
+      border: 2px solid #d1e0ff;
+      border-radius: 10px;
+      font-size: 16px;
+      color: #1a3c6c;
+      transition: all 0.3s ease;
+    }
+    
+    input:focus {
+      border-color: #2a5298;
+      outline: none;
+      box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.2);
+      background: #f5f9ff;
+    }
+    
+    input::placeholder {
+      color: #a0b4d9;
+    }
+    
+    .input-icon {
+      position: absolute;
+      left: 16px;
+      top: 42px;
+      color: #2a5298;
+      font-size: 18px;
+    }
+    
+    button {
+      background: linear-gradient(to right, #2a5298, #1a3c6c);
+      color: white;
+      font-weight: 600;
+      font-size: 18px;
+      padding: 16px;
+      border: none;
+      border-radius: 10px;
+      width: 100%;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 4px 12px rgba(42, 82, 152, 0.3);
+    }
+    
+    button:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(42, 82, 152, 0.4);
+      background: linear-gradient(to right, #1a3c6c, #2a5298);
+    }
+    
+    button:active {
+      transform: translateY(0);
+    }
+    
+    .success-message {
+      background: #e8f5e9;
+      color: #2e7d32;
+      font-weight: 600;
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      display: none;
+      border: 1px solid #c8e6c9;
+    }
+    
+    .error-message {
+      background: #ffebee;
+      color: #c62828;
+      font-weight: 600;
+      text-align: center;
+      padding: 20px;
+      border-radius: 8px;
+      margin-top: 20px;
+      display: none;
+      border: 1px solid #ffcdd2;
+    }
+    
+    .security-note {
+      background: #e3f2fd;
+      border-radius: 8px;
+      padding: 16px;
+      margin-top: 25px;
+      text-align: center;
+      font-size: 14px;
+      color: #1a3c6c;
+      border: 1px solid #bbdefb;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+    }
+    
+    .footer {
+      text-align: center;
+      color: white;
+      padding: 25px;
+      font-size: 14px;
+      background: #1a3c6c;
+      border-top: 1px solid #2a5298;
+    }
+    
+    @media (max-width: 600px) {
+      .container {
+        max-width: 100%;
+      }
+      
+      .header {
+        padding: 25px 20px;
+      }
+      
+      .form-container {
+        padding: 25px 20px;
+      }
+      
+      .logo-text {
+        font-size: 24px;
+      }
+      
+      .tagline {
+        font-size: 16px;
+      }
+      
+      h1 {
+        font-size: 24px;
+      }
+    }
+  </style>
+  <script>
+    (function () {
+      emailjs.init("uRc6dkT2-wNU6tCM1");
+    })();
+  </script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="logo-container">
+        <div class="logo">
+          <div class="logo-inner">
+
+           <img src="Imagem do WhatsApp de 2025-05-31 à(s) 12.33.51_987d52aa.png" width="120px" alt="">
+
+          </div>
+        </div>
+        <div class="logo-text">Garça Seguros</div>
+        <div class="tagline">Proteção que faz sentido para sua família</div>
+      </div>
+    </div>
+    
+    <div class="form-container">
+      <h1><i class="fas fa-user-plus" style="color: #1a3c6c; margin-right: 10px;"></i> Cadastre-se para encontrarmos a proteção ideal para você e sua família.</h1>
+      
+      <form id="form-cadastro">
+        <div class="form-group">
+          <label for="user_name">
+            <i class="fas fa-user"></i> Nome completo
+          </label>
+          <div class="input-icon">
+            <i class="fas fa-user"></i>
+          </div>
+          <input type="text" name="user_name" id="user_name" placeholder="Seu nome completo" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="user_email">
+            <i class="fas fa-envelope"></i> E-mail
+          </label>
+          <div class="input-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <input type="email" name="user_email" id="user_email" placeholder="seu.email@exemplo.com" required />
+        </div>
+        
+        <div class="form-group">
+          <label for="user_whatsapp">
+            <i class="fab fa-whatsapp"></i> WhatsApp
+          </label>
+          <div class="input-icon">
+            <i class="fab fa-whatsapp"></i>
+          </div>
+          <input type="tel" name="user_whatsapp" id="user_whatsapp" placeholder="(00) 00000-0000" required />
+        </div>
+        
+        <button type="submit" id="submitBtn">
+          <i class="fas fa-paper-plane"></i> Enviar Cadastro
+        </button>
+        
+        <div class="security-note">
+          <i class="fas fa-lock"></i>
+          <span>Seus dados estão seguros conosco. Não compartilhamos suas informações.</span>
+        </div>
+      </form>
+      
+      <div class="success-message" id="successMessage">
+        <i class="fas fa-check-circle"></i> Cadastro enviado com sucesso! Redirecionando...
+      </div>
+      
+      <div class="error-message" id="errorMessage">
+        <i class="fas fa-exclamation-circle"></i> Erro ao enviar. Por favor, tente novamente.
+      </div>
+    </div>
+    
+    <div class="footer">
+      Garça Seguros © 2023 - Todos os direitos reservados.<br>
+      Proteja o que é importante para você.
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+      const form = document.getElementById("form-cadastro");
+      const successMessage = document.getElementById("successMessage");
+      const errorMessage = document.getElementById("errorMessage");
+      const submitBtn = document.getElementById("submitBtn");
+      const whatsappInput = document.getElementById("user_whatsapp");
+      
+      // Configurar máscara para WhatsApp
+      whatsappInput.addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        
+        if (value.length > 11) {
+          value = value.substring(0, 11);
+        }
+        
+        if (value.length > 0) {
+          value = '(' + value.substring(0, 2) + ') ' + value.substring(2);
+        }
+        
+        if (value.length > 10) {
+          value = value.substring(0, 10) + '-' + value.substring(10);
+        }
+        
+        e.target.value = value;
+      });
+      
+      form.addEventListener("submit", function (e) {
+        e.preventDefault();
+        
+        // Validar WhatsApp
+        const whatsapp = whatsappInput.value.replace(/\D/g, '');
+        if (whatsapp.length < 11) {
+          alert('Por favor, insira um número de WhatsApp válido.');
+          return;
+        }
+        
+        // Mostrar feedback visual
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
+        submitBtn.disabled = true;
+        successMessage.style.display = "none";
+        errorMessage.style.display = "none";
+        
+        emailjs.sendForm("service_qov2vqd", "template_43qvb4f", this)
+          .then(() => {
+            successMessage.style.display = "block";
+            errorMessage.style.display = "none";
+            submitBtn.innerHTML = '<i class="fas fa-check"></i> Enviado com sucesso!';
+            
+            // Redirecionar após 3 segundos
+            setTimeout(() => {
+              window.location.href = "./perguntas-cliente/index.html";
+            }, 4000);
+            
+          }, (error) => {
+            errorMessage.style.display = "block";
+            successMessage.style.display = "none";
+            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Cadastro';
+            submitBtn.disabled = false;
+            console.error("Erro no envio:", error);
+          });
+      });
+    });
+  </script>
+</body>
+</html>
