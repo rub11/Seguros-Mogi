@@ -1,392 +1,770 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Garça Seguros - Cadastro</title>
-  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    }
-    
-    body {
-      background: linear-gradient(135deg, #1a3c6c, #2a5298);
-      color: #003366;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      min-height: 100vh;
-      padding: 20px;
-    }
-    
-    .container {
-      background: white;
-      border-radius: 16px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-      max-width: 500px;
-      width: 100%;
-      overflow: hidden;
-      position: relative;
-    }
-    
-    .header {
-      background: linear-gradient(to right, #0a2a5a, #1a3c6c);
-      color: white;
-      padding: 30px;
-      text-align: center;
-      position: relative;
-    }
-    
-    .logo-container {
-      margin-bottom: 20px;
-    }
-    
-    .logo {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      background: white;
-      width: 80px;
-      height: 80px;
-      border-radius: 50%;
-      margin-bottom: 15px;
-    }
-    
-    .logo-inner {
-      width: 60px;
-      height: 60px;
-      background: #1a3c6c;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    
-    .logo-icon {
-      font-size: 28px;
-      color: white;
-    }
-    
-    .logo-text {
-      font-size: 28px;
-      font-weight: 700;
-      letter-spacing: 0.5px;
-      margin-bottom: 8px;
-    }
-    
-    .tagline {
-      font-size: 18px;
-      opacity: 0.9;
-      max-width: 400px;
-      margin: 0 auto;
-    }
-    
-    .form-container {
-      padding: 30px;
-    }
-    
-    h1 {
-      text-align: center;
-      margin-bottom: 25px;
-      color: #1a3c6c;
-      font-size: 26px;
-    }
-    
-    .form-group {
-      margin-bottom: 25px;
-      position: relative;
-    }
-    
-    label {
-      display: block;
-      margin-bottom: 8px;
-      font-weight: 600;
-      color: #1a3c6c;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    
-    input {
-      width: 100%;
-      padding: 14px 16px 14px 48px;
-      border: 2px solid #d1e0ff;
-      border-radius: 10px;
-      font-size: 16px;
-      color: #1a3c6c;
-      transition: all 0.3s ease;
-    }
-    
-    input:focus {
-      border-color: #2a5298;
-      outline: none;
-      box-shadow: 0 0 0 3px rgba(42, 82, 152, 0.2);
-      background: #f5f9ff;
-    }
-    
-    input::placeholder {
-      color: #a0b4d9;
-    }
-    
-    .input-icon {
-      position: absolute;
-      left: 16px;
-      top: 42px;
-      color: #2a5298;
-      font-size: 18px;
-    }
-    
-    button {
-      background: linear-gradient(to right, #2a5298, #1a3c6c);
-      color: white;
-      font-weight: 600;
-      font-size: 18px;
-      padding: 16px;
-      border: none;
-      border-radius: 10px;
-      width: 100%;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-      box-shadow: 0 4px 12px rgba(42, 82, 152, 0.3);
-    }
-    
-    button:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 6px 16px rgba(42, 82, 152, 0.4);
-      background: linear-gradient(to right, #1a3c6c, #2a5298);
-    }
-    
-    button:active {
-      transform: translateY(0);
-    }
-    
-    .success-message {
-      background: #e8f5e9;
-      color: #2e7d32;
-      font-weight: 600;
-      text-align: center;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-      display: none;
-      border: 1px solid #c8e6c9;
-    }
-    
-    .error-message {
-      background: #ffebee;
-      color: #c62828;
-      font-weight: 600;
-      text-align: center;
-      padding: 20px;
-      border-radius: 8px;
-      margin-top: 20px;
-      display: none;
-      border: 1px solid #ffcdd2;
-    }
-    
-    .security-note {
-      background: #e3f2fd;
-      border-radius: 8px;
-      padding: 16px;
-      margin-top: 25px;
-      text-align: center;
-      font-size: 14px;
-      color: #1a3c6c;
-      border: 1px solid #bbdefb;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      gap: 10px;
-    }
-    
-    .footer {
-      text-align: center;
-      color: white;
-      padding: 25px;
-      font-size: 14px;
-      background: #1a3c6c;
-      border-top: 1px solid #2a5298;
-    }
-    
-    @media (max-width: 600px) {
-      .container {
-        max-width: 100%;
-      }
-      
-      .header {
-        padding: 25px 20px;
-      }
-      
-      .form-container {
-        padding: 25px 20px;
-      }
-      
-      .logo-text {
-        font-size: 24px;
-      }
-      
-      .tagline {
-        font-size: 16px;
-      }
-      
-      h1 {
-        font-size: 24px;
-      }
-    }
-  </style>
-  <script>
-    (function () {
-      emailjs.init("uRc6dkT2-wNU6tCM1");
-    })();
-  </script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Garça Seguros - Formulário de Contato</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <style>
+        :root {
+            --primary: #0056b3;
+            --primary-dark: #003d7a;
+            --secondary: #28a745;
+            --accent: #ff6b00;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #1a3a6c, #0056b3);
+            color: var(--dark);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .card {
+            background: white;
+            border-radius: 15px;
+            box-shadow: var(--shadow);
+            overflow: hidden;
+        }
+
+        .card-header {
+            background: var(--primary);
+            color: white;
+            padding: 30px;
+            text-align: center;
+            position: relative;
+        }
+
+        .logo-circle {
+            width: 120px;
+            height: 120px;
+            background: white;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 4px solid var(--accent);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .logo-placeholder {
+            font-size: 40px;
+            color: var(--primary);
+        }
+
+        .card-header h1 {
+            font-size: 32px;
+            margin-bottom: 10px;
+            font-weight: 700;
+        }
+
+        .card-header p {
+            font-size: 18px;
+            opacity: 0.9;
+        }
+
+        .card-body {
+            padding: 30px;
+        }
+
+        .form-section {
+            margin-bottom: 30px;
+            padding: 25px;
+            border-radius: 10px;
+            background: var(--light);
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-section h2 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--accent);
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .form-section h2 i {
+            color: var(--accent);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 600;
+            color: var(--dark);
+            font-size: 16px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid var(--light-gray);
+            border-radius: 8px;
+            font-size: 16px;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(0, 86, 179, 0.2);
+        }
+
+        .radio-group, .checkbox-group {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 5px;
+        }
+
+        .radio-option, .checkbox-option {
+            display: flex;
+            align-items: center;
+        }
+
+        .radio-option input, .checkbox-option input {
+            margin-right: 8px;
+            width: 20px;
+            height: 20px;
+        }
+
+        .checkbox-option {
+            background: white;
+            padding: 12px 15px;
+            border-radius: 8px;
+            border: 2px solid var(--light-gray);
+            flex: 1 1 200px;
+            transition: var(--transition);
+        }
+
+        .checkbox-option:hover {
+            border-color: var(--primary);
+        }
+
+        .checkbox-option input:checked + label {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .conditional-group {
+            background: rgba(0, 86, 179, 0.05);
+            border-left: 4px solid var(--primary);
+            padding: 20px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 15px;
+            display: none;
+        }
+
+        .btn-submit {
+            display: block;
+            width: 100%;
+            padding: 16px;
+            background: var(--secondary);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            box-shadow: 0 4px 8px rgba(40, 167, 69, 0.3);
+        }
+
+        .btn-submit:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:active {
+            transform: translateY(0);
+        }
+
+        .success-message {
+            text-align: center;
+            padding: 40px;
+            display: none;
+        }
+
+        .success-message i {
+            font-size: 60px;
+            color: var(--secondary);
+            margin-bottom: 20px;
+        }
+
+        .success-message h2 {
+            font-size: 32px;
+            margin-bottom: 15px;
+            color: var(--primary);
+        }
+
+        .success-message p {
+            font-size: 18px;
+            margin-bottom: 25px;
+            color: var(--gray);
+        }
+
+        .countdown {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary);
+            margin: 15px 0;
+        }
+
+        .redirect-link {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 12px 30px;
+            background: var(--primary);
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 600;
+            transition: var(--transition);
+        }
+
+        .redirect-link:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 15px;
+            border-radius: 8px;
+            margin-top: 20px;
+            display: none;
+            border-left: 4px solid #c62828;
+        }
+
+        .error-message i {
+            margin-right: 10px;
+        }
+
+        @media (max-width: 768px) {
+            .card-header {
+                padding: 20px;
+            }
+            
+            .card-body {
+                padding: 20px;
+            }
+            
+            .form-section {
+                padding: 20px;
+            }
+            
+            .checkbox-group {
+                flex-direction: column;
+            }
+            
+            .checkbox-option {
+                width: 100%;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-circle {
+                width: 100px;
+                height: 100px;
+            }
+            
+            .card-header h1 {
+                font-size: 26px;
+            }
+            
+            .form-section h2 {
+                font-size: 20px;
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container">
-    <div class="header">
-      <div class="logo-container">
-        <div class="logo">
-          <div class="logo-inner">
-
-           <img src="Imagem do WhatsApp de 2025-05-31 à(s) 12.33.51_987d52aa.png" width="120px" alt="">
-
-          </div>
-        </div>
-        <div class="logo-text">Garça Seguros</div>
-        <div class="tagline">Proteção que faz sentido para sua família</div>
-      </div>
-    </div>
-    
-    <div class="form-container">
-      <h1><i class="fas fa-user-plus" style="color: #1a3c6c; margin-right: 10px;"></i> Cadastre-se para encontrarmos a proteção ideal para você e sua família.</h1>
-      
-      <form id="form-cadastro">
-        <div class="form-group">
-          <label for="user_name">
-            <i class="fas fa-user"></i> Nome completo
-          </label>
-          <div class="input-icon">
-            <i class="fas fa-user"></i>
-          </div>
-          <input type="text" name="user_name" id="user_name" placeholder="Seu nome completo" required />
-        </div>
-        
-        <div class="form-group">
-          <label for="user_email">
-            <i class="fas fa-envelope"></i> E-mail
-          </label>
-          <div class="input-icon">
-            <i class="fas fa-envelope"></i>
-          </div>
-          <input type="email" name="user_email" id="user_email" placeholder="seu.email@exemplo.com" required />
-        </div>
-        
-        <div class="form-group">
-          <label for="user_whatsapp">
-            <i class="fab fa-whatsapp"></i> WhatsApp
-          </label>
-          <div class="input-icon">
-            <i class="fab fa-whatsapp"></i>
-          </div>
-          <input type="tel" name="user_whatsapp" id="user_whatsapp" placeholder="(00) 00000-0000" required />
-        </div>
-        
-        <button type="submit" id="submitBtn">
-          <i class="fas fa-paper-plane"></i> Enviar Cadastro
-        </button>
-        
-        <div class="security-note">
-          <i class="fas fa-lock"></i>
-          <span>Seus dados estão seguros conosco. Não compartilhamos suas informações.</span>
-        </div>
-      </form>
-      
-      <div class="success-message" id="successMessage">
-        <i class="fas fa-check-circle"></i> Cadastro enviado com sucesso! Redirecionando...
-      </div>
-      
-      <div class="error-message" id="errorMessage">
-        <i class="fas fa-exclamation-circle"></i> Erro ao enviar. Por favor, tente novamente.
-      </div>
-    </div>
-    
-    <div class="footer">
-      Garça Seguros © 2023 - Todos os direitos reservados.<br>
-      Proteja o que é importante para você.
-    </div>
-  </div>
-
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const form = document.getElementById("form-cadastro");
-      const successMessage = document.getElementById("successMessage");
-      const errorMessage = document.getElementById("errorMessage");
-      const submitBtn = document.getElementById("submitBtn");
-      const whatsappInput = document.getElementById("user_whatsapp");
-      
-      // Configurar máscara para WhatsApp
-      whatsappInput.addEventListener('input', function(e) {
-        let value = e.target.value.replace(/\D/g, '');
-        
-        if (value.length > 11) {
-          value = value.substring(0, 11);
-        }
-        
-        if (value.length > 0) {
-          value = '(' + value.substring(0, 2) + ') ' + value.substring(2);
-        }
-        
-        if (value.length > 10) {
-          value = value.substring(0, 10) + '-' + value.substring(10);
-        }
-        
-        e.target.value = value;
-      });
-      
-      form.addEventListener("submit", function (e) {
-        e.preventDefault();
-        
-        // Validar WhatsApp
-        const whatsapp = whatsappInput.value.replace(/\D/g, '');
-        if (whatsapp.length < 11) {
-          alert('Por favor, insira um número de WhatsApp válido.');
-          return;
-        }
-        
-        // Mostrar feedback visual
-        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Enviando...';
-        submitBtn.disabled = true;
-        successMessage.style.display = "none";
-        errorMessage.style.display = "none";
-        
-        emailjs.sendForm("service_qov2vqd", "template_43qvb4f", this)
-          .then(() => {
-            successMessage.style.display = "block";
-            errorMessage.style.display = "none";
-            submitBtn.innerHTML = '<i class="fas fa-check"></i> Enviado com sucesso!';
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <div class="logo-circle">
+                    <i class="fas fa-dove logo-placeholder"></i>
+                </div>
+                <h1>Garça Seguros</h1>
+                <p>Preencha o formulário e receba uma proposta personalizada</p>
+            </div>
             
-            // Redirecionar após 3 segundos
-            setTimeout(() => {
-              window.location.href = "./perguntas-cliente/index.html";
-            }, 4000);
+            <form id="insurance-form">
+                <div class="card-body">
+                    <!-- Mensagem de erro -->
+                    <div class="error-message" id="error-message">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <span id="error-text">Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.</span>
+                    </div>
+                    
+                    <!-- Informações Pessoais -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-user"></i> Informações Pessoais</h2>
+                        
+                        <div class="form-group">
+                            <label for="nome">Nome completo*</label>
+                            <input type="text" id="nome" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">E-mail*</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="telefone">Telefone (com DDD)*</label>
+                            <input type="tel" id="telefone" class="form-control" placeholder="(99) 99999-9999" required>
+                        </div>
+                    </div>
+                    
+                    <!-- Experiência com Seguros -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-shield-alt"></i> Experiência com Seguros</h2>
+                        
+                        <div class="form-group">
+                            <label>Você já teve seguro antes?*</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="teve_seguro_sim" name="teve_seguro" value="Sim" required>
+                                    <label for="teve_seguro_sim">Sim</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="teve_seguro_nao" name="teve_seguro" value="Não">
+                                    <label for="teve_seguro_nao">Não</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Atualmente tem algum seguro ativo?*</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="seguro_ativo_sim" name="seguro_ativo" value="Sim" required>
+                                    <label for="seguro_ativo_sim">Sim</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="seguro_ativo_nao" name="seguro_ativo" value="Não">
+                                    <label for="seguro_ativo_nao">Não</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="seguradora-group" class="conditional-group">
+                            <div class="form-group">
+                                <label for="seguradora">Se sim, qual seguradora?</label>
+                                <select id="seguradora" class="form-control">
+                                    <option value="">Selecione...</option>
+                                    <option value="Porto Seguro">Porto Seguro</option>
+                                    <option value="SulAmérica">SulAmérica</option>
+                                    <option value="Bradesco Seguros">Bradesco Seguros</option>
+                                    <option value="Tokio Marine">Tokio Marine</option>
+                                    <option value="Allianz">Allianz</option>
+                                    <option value="Outro">Outro</option>
+                                </select>
+                            </div>
+                            
+                            <div id="outra-seguradora-group" class="form-group" style="display: none;">
+                                <label for="outra_seguradora">Qual outra seguradora?</label>
+                                <input type="text" id="outra_seguradora" class="form-control">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Tipos de Seguro -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-clipboard-list"></i> Tipos de Seguro</h2>
+                        <p>Selecione um ou mais tipos de seguro que você está buscando:</p>
+                        
+                        <div class="checkbox-group">
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="seguro_vida" name="tipo_seguro" value="Seguro de Vida">
+                                <label for="seguro_vida">Seguro de Vida</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="seguro_automovel" name="tipo_seguro" value="Seguro de Automóvel">
+                                <label for="seguro_automovel">Seguro de Automóvel</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="seguro_residencial" name="tipo_seguro" value="Seguro Residencial">
+                                <label for="seguro_residencial">Seguro Residencial</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="seguro_empresarial" name="tipo_seguro" value="Seguro Empresarial">
+                                <label for="seguro_empresarial">Seguro Empresarial</label>
+                            </div>
+                            
+                            <div class="checkbox-option">
+                                <input type="checkbox" id="outros_seguros" name="tipo_seguro" value="Outros">
+                                <label for="outros_seguros">Outros</label>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Campos Condicionais -->
+                    <!-- Seguro de Automóvel -->
+                    <div id="automovel-group" class="form-section conditional-group">
+                        <h2><i class="fas fa-car"></i> Dados do Veículo</h2>
+                        
+                        <div class="form-group">
+                            <label for="modelo_carro">Qual é o modelo do seu carro?</label>
+                            <input type="text" id="modelo_carro" class="form-control">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="ano_carro">Ano de fabricação?</label>
+                            <input type="text" id="ano_carro" class="form-control" placeholder="Ex: 2020">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Já tem seguro atual?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="seguro_auto_sim" name="seguro_auto_ativo" value="Sim">
+                                    <label for="seguro_auto_sim">Sim</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="seguro_auto_nao" name="seguro_auto_ativo" value="Não">
+                                    <label for="seguro_auto_nao">Não</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Deseja renovar ou contratar um novo seguro?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="renovar" name="renovar_contratar" value="Renovar">
+                                    <label for="renovar">Renovar</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="contratar" name="renovar_contratar" value="Contratar">
+                                    <label for="contratar">Contratar</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Seguro Empresarial -->
+                    <div id="empresarial-group" class="form-section conditional-group">
+                        <h2><i class="fas fa-building"></i> Dados da Empresa</h2>
+                        
+                        <div class="form-group">
+                            <label for="tipo_empresa">Qual é o tipo de empresa?</label>
+                            <input type="text" id="tipo_empresa" class="form-control" placeholder="Ex: comércio, serviço, indústria, etc.">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="num_funcionarios">Quantos funcionários a empresa possui?</label>
+                            <input type="number" id="num_funcionarios" class="form-control" min="0">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Deseja proteger o imóvel, os equipamentos ou ambos?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="protecao_imovel" name="protecao_empresa" value="Imóvel">
+                                    <label for="protecao_imovel">Imóvel</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="protecao_equipamentos" name="protecao_empresa" value="Equipamentos">
+                                    <label for="protecao_equipamentos">Equipamentos</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="protecao_ambos" name="protecao_empresa" value="Ambos">
+                                    <label for="protecao_ambos">Ambos</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Seguro de Vida -->
+                    <div id="vida-group" class="form-section conditional-group">
+                        <h2><i class="fas fa-heart"></i> Seguro de Vida</h2>
+                        
+                        <div class="form-group">
+                            <label>Para quem é o seguro?</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="para_voce" name="para_quem" value="Você">
+                                    <label for="para_voce">Você</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="para_conjuge" name="para_quem" value="Cônjuge">
+                                    <label for="para_conjuge">Cônjuge</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="para_filhos" name="para_quem" value="Filhos">
+                                    <label for="para_filhos">Filhos</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="para_outros" name="para_quem" value="Outros">
+                                    <label for="para_outros">Outros</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Você já tem algum seguro de vida ativo?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="seguro_vida_sim" name="seguro_vida_ativo" value="Sim">
+                                    <label for="seguro_vida_sim">Sim</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="seguro_vida_nao" name="seguro_vida_ativo" value="Não">
+                                    <label for="seguro_vida_nao">Não</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Seguro Residencial -->
+                    <div id="residencial-group" class="form-section conditional-group">
+                        <h2><i class="fas fa-home"></i> Seguro Residencial</h2>
+                        
+                        <div class="form-group">
+                            <label>O imóvel é próprio ou alugado?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="proprio" name="tipo_imovel" value="Próprio">
+                                    <label for="proprio">Próprio</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="alugado" name="tipo_imovel" value="Alugado">
+                                    <label for="alugado">Alugado</label>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Deseja proteger contra quais riscos?</label>
+                            <div class="checkbox-group">
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="incendio" name="riscos" value="Incêndio">
+                                    <label for="incendio">Incêndio</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="roubo" name="riscos" value="Roubo">
+                                    <label for="roubo">Roubo</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="danos_eletricos" name="riscos" value="Danos elétricos">
+                                    <label for="danos_eletricos">Danos elétricos</label>
+                                </div>
+                                <div class="checkbox-option">
+                                    <input type="checkbox" id="outros_riscos" name="riscos" value="Outros">
+                                    <label for="outros_riscos">Outros</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Última pergunta -->
+                    <div class="form-section">
+                        <h2><i class="fas fa-question-circle"></i> Dúvidas</h2>
+                        
+                        <div class="form-group">
+                            <label>Você tem dúvidas sobre renovação ou contratação do seguro?</label>
+                            <div class="radio-group">
+                                <div class="radio-option">
+                                    <input type="radio" id="duvidas_sim" name="duvidas" value="Sim" required>
+                                    <label for="duvidas_sim">Sim</label>
+                                </div>
+                                <div class="radio-option">
+                                    <input type="radio" id="duvidas_nao" name="duvidas" value="Não">
+                                    <label for="duvidas_nao">Não</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="btn-submit">
+                        <i class="fas fa-paper-plane"></i> Enviar Solicitação
+                    </button>
+                </div>
+            </form>
             
-          }, (error) => {
-            errorMessage.style.display = "block";
-            successMessage.style.display = "none";
-            submitBtn.innerHTML = '<i class="fas fa-paper-plane"></i> Enviar Cadastro';
-            submitBtn.disabled = false;
-            console.error("Erro no envio:", error);
-          });
-      });
+            <!-- Mensagem de sucesso -->
+            <div class="success-message">
+                <i class="fas fa-check-circle"></i>
+                <h2>Obrigado pelo seu contato!</h2>
+                <p>Seus dados foram enviados com sucesso. Nossa equipe entrará em contato em breve com uma proposta personalizada.</p>
+                <div class="countdown">
+                    Você será redirecionado em <span id="countdown">20</span> segundos
+                </div>
+                <a href="#" class="redirect-link" id="redirect-link">Clique aqui para ser redirecionado agora</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar EmailJS com o User ID fornecido
+    emailjs.init("pdC5gn4yr74WovMUs");
+    
+    const form = document.getElementById('insurance-form');
+    const successMessage = document.querySelector('.success-message');
+    const countdownElement = document.getElementById('countdown');
+    const redirectLink = document.getElementById('redirect-link');
+    const errorMessage = document.getElementById('error-message');
+    const errorText = document.getElementById('error-text');
+
+    // Mostrar/ocultar campo de seguradora
+    const seguroAtivoRadios = document.querySelectorAll('input[name="seguro_ativo"]');
+    const seguradoraGroup = document.getElementById('seguradora-group');
+    const seguradoraSelect = document.getElementById('seguradora');
+    const outraSeguradoraGroup = document.getElementById('outra-seguradora-group');
+
+    seguroAtivoRadios.forEach(radio => {
+        radio.addEventListener('change', function() {
+            seguradoraGroup.style.display = (this.value === 'Sim' && this.checked) ? 'block' : 'none';
+        });
     });
-  </script>
+
+    seguradoraSelect.addEventListener('change', function() {
+        outraSeguradoraGroup.style.display = (this.value === 'Outro') ? 'block' : 'none';
+    });
+
+    // Mostrar campos condicionais baseados no tipo de seguro
+    const seguroCheckboxes = document.querySelectorAll('input[name="tipo_seguro"]');
+    const automovelGroup = document.getElementById('automovel-group');
+    const empresarialGroup = document.getElementById('empresarial-group');
+    const vidaGroup = document.getElementById('vida-group');
+    const residencialGroup = document.getElementById('residencial-group');
+
+    seguroCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            automovelGroup.style.display = document.getElementById('seguro_automovel').checked ? 'block' : 'none';
+            empresarialGroup.style.display = document.getElementById('seguro_empresarial').checked ? 'block' : 'none';
+            vidaGroup.style.display = document.getElementById('seguro_vida').checked ? 'block' : 'none';
+            residencialGroup.style.display = document.getElementById('seguro_residencial').checked ? 'block' : 'none';
+        });
+    });
+
+    // Envio do formulário
+    form.addEventListener('submit', function(e) {
+        e.preventDefault();
+        errorMessage.style.display = 'none';
+
+        if (!form.checkValidity()) {
+            showError('Por favor, preencha todos os campos obrigatórios.');
+            return;
+        }
+
+        const formData = {
+            nome: document.getElementById('nome').value,
+            email: document.getElementById('email').value,
+            telefone: document.getElementById('telefone').value,
+            teve_seguro: document.querySelector('input[name="teve_seguro"]:checked').value,
+            seguro_ativo: document.querySelector('input[name="seguro_ativo"]:checked').value,
+            seguradora: seguradoraSelect.value,
+            outra_seguradora: document.getElementById('outra_seguradora')?.value || '',
+            tipo_seguro: Array.from(document.querySelectorAll('input[name="tipo_seguro"]:checked')).map(cb => cb.value),
+            duvidas: document.querySelector('input[name="duvidas"]:checked').value,
+            modelo_carro: document.getElementById('modelo_carro')?.value || '',
+            ano_carro: document.getElementById('ano_carro')?.value || '',
+            seguro_auto_ativo: document.querySelector('input[name="seguro_auto_ativo"]:checked')?.value || '',
+            renovar_contratar: document.querySelector('input[name="renovar_contratar"]:checked')?.value || '',
+            tipo_empresa: document.getElementById('tipo_empresa')?.value || '',
+            num_funcionarios: document.getElementById('num_funcionarios')?.value || '',
+            protecao_empresa: document.querySelector('input[name="protecao_empresa"]:checked')?.value || '',
+            para_quem: Array.from(document.querySelectorAll('input[name="para_quem"]:checked')).map(cb => cb.value),
+            seguro_vida_ativo: document.querySelector('input[name="seguro_vida_ativo"]:checked')?.value || '',
+            tipo_imovel: document.querySelector('input[name="tipo_imovel"]:checked')?.value || '',
+            riscos: Array.from(document.querySelectorAll('input[name="riscos"]:checked')).map(cb => cb.value)
+        };
+
+        emailjs.send('service_tluwktp', 'template_bfvqc0f', {
+            from_name: formData.nome,
+            from_email: formData.email,
+            telefone: formData.telefone,
+            teve_seguro: formData.teve_seguro,
+            seguro_ativo: formData.seguro_ativo,
+            seguradora: formData.seguradora + (formData.outra_seguradora ? ' (' + formData.outra_seguradora + ')' : ''),
+            tipo_seguro: formData.tipo_seguro.join(', '),
+            duvidas: formData.duvidas,
+            modelo_carro: formData.modelo_carro,
+            ano_carro: formData.ano_carro,
+            seguro_auto_ativo: formData.seguro_auto_ativo,
+            renovar_contratar: formData.renovar_contratar,
+            tipo_empresa: formData.tipo_empresa,
+            num_funcionarios: formData.num_funcionarios,
+            protecao_empresa: formData.protecao_empresa,
+            para_quem: formData.para_quem.join(', '),
+            seguro_vida_ativo: formData.seguro_vida_ativo,
+            tipo_imovel: formData.tipo_imovel,
+            riscos: formData.riscos.join(', ')
+        }).then(function(response) {
+            form.style.display = 'none';
+            successMessage.style.display = 'block';
+
+            let seconds = 20;
+            const countdownInterval = setInterval(() => {
+                seconds--;
+                countdownElement.textContent = seconds;
+
+                if (seconds <= 0) {
+                    clearInterval(countdownInterval);
+                    redirect();
+                }
+            }, 1000);
+        }, function(error) {
+            showError('Ocorreu um erro ao enviar o formulário. Por favor, tente novamente.<br>Erro: ' + error.text);
+            console.error('Erro EmailJS:', error);
+        });
+    });
+
+    function showError(message) {
+        errorText.innerHTML = message;
+        errorMessage.style.display = 'block';
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function redirect() {
+        window.location.href = "https://www.garcaseguros.com.br/obrigado";
+    }
+
+    redirectLink.addEventListener('click', function(e) {
+        e.preventDefault();
+        redirect();
+    });
+});
+</script>
+
 </body>
 </html>
